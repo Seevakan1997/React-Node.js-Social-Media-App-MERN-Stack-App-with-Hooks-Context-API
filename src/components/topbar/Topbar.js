@@ -1,13 +1,16 @@
 import React from 'react'
 import "./topbar.css"
 import { Search as SearchIcon, Person as PersonIcon, Chat as ChatIcon, Notifications  as NotoficationsIcon } from '@mui/icons-material';
+import {Link} from 'react-router-dom';
 
 export default function Topbar() {
   return (
     <div className='topbarContainer'>
 
         <div className='topbarLeft'>
+        <Link to="/" style={{textDecoration:"none"}}>
         <spam className='logo'>StarKing</spam>
+        </Link>
         </div>
 
         <div className='topbarCenter'>

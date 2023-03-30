@@ -2,6 +2,8 @@ import React from 'react'
 import './rightbar.css'
 
 export default function Rightbar({ profile }) {
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const HomeRightbar = () => {
     return (
       <>
@@ -44,7 +46,7 @@ export default function Rightbar({ profile }) {
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             <img
-              src="assets/3.jpg"
+              src={`${PF}3.jpg`}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -52,7 +54,7 @@ export default function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/9.jpg"
+              src={`${PF}9.jpg`}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -60,7 +62,7 @@ export default function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/3.jpg"
+              src={`${PF}3.jpg`}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -68,7 +70,7 @@ export default function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/9.jpg"
+              src={`${PF}9.jpg`}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -76,7 +78,7 @@ export default function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/3.jpg"
+              src={`${PF}3.jpg`}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -84,7 +86,7 @@ export default function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/9.jpg"
+              src={`${PF}9.jpg`}
               alt=""
               className="rightbarFollowingImg"
             />
