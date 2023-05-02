@@ -3,6 +3,7 @@ import './post.css'
 import { MoreVert as MoreVertIcon} from '@mui/icons-material';
 import axios from "axios";
 import * as timeago from 'timeago.js';
+import {Link} from 'react-router-dom';
 
 export default function Post({post}) {
 
@@ -11,30 +12,32 @@ export default function Post({post}) {
     const [user,setUser] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-    const likeHandler =()=>{
-        setLike (isLiked ? like-1 : like+1)
-        setIsLike(!isLiked)
-    }
-
+    
     useEffect(()=>{
       const fetchUser = async ()=>{
-        const res = await axios.get(`users/${post.userId}`);
+        const res = await axios.get(`/users?userId=${post.userId}`);
         setUser(res.data);
       }
       fetchUser();
     },[post.userId])
   
+    const likeHandler =()=>{
+      setLike (isLiked ? like-1 : like+1)
+      setIsLike(!isLiked)
+  }
 
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
+          <Link to={`profile/${user.username}`} style={{textDecoration:"none"}}>
             <img
               className="postProfileImg"
               src={user.profilePicture || PF+"no-profile.jpg"}
               alt=""
             />
+            </Link>
             <span className="postUsername">
               {user.username}
             </span>
