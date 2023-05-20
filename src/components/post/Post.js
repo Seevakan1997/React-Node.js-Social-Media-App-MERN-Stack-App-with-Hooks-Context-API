@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './post.css'
 import { MoreVert as MoreVertIcon} from '@mui/icons-material';
 import axios from "axios";
 import * as timeago from 'timeago.js';
 import {Link} from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Post({post}) {
 
     const [like,setLike] = useState(post.likes.length);
-    const [isLiked,setIsLike] = useState(false);
+    const [isLiked,setIsLiked] = useState(false);
     const [user,setUser] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+    const {user:currentUser} = useContext(AuthContext);
     
+    useEffect(()=>{
+      setIsLiked(post.likes.includes(currentUser._id));
+    },[currentUser._id, post.likes])
+
     useEffect(()=>{
       const fetchUser = async ()=>{
         const res = await axios.get(`/users?userId=${post.userId}`);
@@ -22,8 +27,13 @@ export default function Post({post}) {
     },[post.userId])
   
     const likeHandler =()=>{
+      try{
+        axios.put("/posts/"+post._id+"/like",{userId:currentUser._id})
+      }catch(err){
+
+      }
       setLike (isLiked ? like-1 : like+1)
-      setIsLike(!isLiked)
+      setIsLiked(!isLiked)
   }
 
   return (
@@ -34,7 +44,7 @@ export default function Post({post}) {
           <Link to={`profile/${user.username}`} style={{textDecoration:"none"}}>
             <img
               className="postProfileImg"
-              src={user.profilePicture || PF+"no-profile.jpg"}
+              src={user.profilePicture ? PF+ user.profilePicture : PF+"no-profile.jpg"}
               alt=""
             />
             </Link>
@@ -49,7 +59,7 @@ export default function Post({post}) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={post.img} alt="" />
+          <img className="postImg" src={PF+post.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
