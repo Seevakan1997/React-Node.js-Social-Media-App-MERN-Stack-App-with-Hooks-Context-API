@@ -3,6 +3,7 @@ import './share.css'
 import { PermMedia as PermMediaIcon, Label as LabelIcon, Room as RoomIcon, EmojiEmotions  as EmojiEmotionsIcon } from '@mui/icons-material';
 import { AuthContext } from '../../context/AuthContext';
 import axios from "axios";
+import {Cancel as CancelIcon} from '@mui/icons-material';
 
 export default function Share() {
   const {user} = useContext(AuthContext);
@@ -44,13 +45,19 @@ export default function Share() {
         <div className="share">
           <div className="shareWrapper">
             <div className="shareTop">
-              <img className="shareProfileImg" src={user.profilePicture ? PF+user.profilePicture : PF+"no-profile.jpg"} alt="" />
+              <img className="shareProfileImg" src={user.profilePicture ? user.profilePicture : PF+"no-profile.jpg"} alt="" />
               <input
                 placeholder={"What's in your mind " + user.username +"?"}
                 className="shareInput" ref={desc}
               />
             </div>
             <hr className="shareHr"/>
+            {file && (
+              <div className='shareImgContainer'>
+                <img src={URL.createObjectURL(file)} alt='' className='shareImg'/>
+                <CancelIcon className='shareCancelImg' onClick={()=>setFile(null)}/>
+              </div>
+            )}
             <form className="shareBottom" onSubmit={submitHandler}>
                 <div className="shareOptions">
                     <label htmlFor='file' className="shareOption">

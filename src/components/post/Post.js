@@ -44,7 +44,7 @@ export default function Post({post}) {
           <Link to={`profile/${user.username}`} style={{textDecoration:"none"}}>
             <img
               className="postProfileImg"
-              src={user.profilePicture ? PF+ user.profilePicture : PF+"no-profile.jpg"}
+              src={user.profilePicture ? user.profilePicture : PF+"no-profile.jpg"}
               alt=""
             />
             </Link>

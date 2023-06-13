@@ -20,6 +20,10 @@ export default function Profile() {
     fetchUser();
   },[username])
 
+  if (Object.keys(user).length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Topbar />
@@ -30,12 +34,12 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={user.coverPicture || PF+"cover.jpg"}
+                src={user.coverPicture ? PF+user.coverPicture : PF+"cover.jpg"}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src={user.profilePicture || PF+"no-profile.jpg"}
+                src={user.profilePicture ? user.profilePicture : PF+"no-profile.jpg"}
                 alt=""
               />
             </div>
